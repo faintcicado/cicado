@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
+const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
 function App() {
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/count')
+    axios.get(`${apiUrl}/api/count`)
       .then(response => {
         setCount(response.data.count);
       })
@@ -16,7 +18,7 @@ function App() {
   }, []);
 
   const incrementCount = () => {
-    axios.post('http://localhost:3001/api/count/increment')
+    axios.post(`${apiUrl}/api/count/increment`)
       .then(response => {
         setCount(response.data.count);
       })
